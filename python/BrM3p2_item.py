@@ -16,3 +16,5 @@ print(capital_by_country)
 value = capital_by_country.pop('Казахстан','Нет информации')
 print(value)
 print(capital_by_country)							#Теперь здесь нет Казахстана
+for country, capital in capital_by_country.items():
+	print(country, capital)

@@ -18,3 +18,6 @@ print(diff_observations)
 
 for i, val in enumerate(observations):
 	print(i, val)
+
+y = [i for i in observations if i < 0]
+print(y)

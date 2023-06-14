@@ -24,3 +24,12 @@ print(lll)
 table[0] = 1
 #table[1][1] = 45 		ошибка
 print(table[1][1])
+
+a = ('2',)
+b = 'z'
+new = a + (b,)
+print(new)
+
+c = (1,2,3,4,5)
+d = c[:2] + c[3:]
+print(d)
