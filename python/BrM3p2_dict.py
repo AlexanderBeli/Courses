@@ -3,6 +3,7 @@ capital_by_country = {
 	'США': 'Вашингтон',
 	'Китай': 'Пекин',
 }
+
 print(capital_by_country['Россия'])
 capital_by_country['Казахстан'] = 'Астана'
 print(capital_by_country)
