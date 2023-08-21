@@ -1,3 +1,4 @@
-import sys
+a = '563'
+b = '573'
 
-print(sys.getrecursionlimit())
+print(a > b)
