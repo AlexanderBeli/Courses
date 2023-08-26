@@ -1,25 +1,28 @@
-from random import randint
+visited = []
+queue = []
 
-a = []
-for i in range(10):
-    a.append(randint(1, 50))
+def bfs(visited, graph, node):
+	visited.append(node)
+	queue.append(node)
 
-print(a)
+	while queue:
+		s = queue.pop(0)
+		print(s, end = ' ')
 
-#a = [int(x) for x in a]
+		for neighbor in graph[s]:
+			if neighbor not in visited:
+				visited.append(neighbor)
+				queue.append(neighbor)
 
-def sortion_function(a):
-#	if i is None:
-#		i = -1
 
-#	i += 1 
-	pl = len(a)
-	for i in range(len(a)):
-		sortion_function(a[pl - 1])
-		print(sortion_function(a[pl - 1]))
-#			if a[i] > a[i+1] and i+1 < (pl -1):
-#				a[i], a[i+1] = a[i+1], a[i]
-	return a
+if __name__ == '__main__':
 
-sortion_function(a)
-print(a)
+	graph = {
+	'A' : set(['0', '1']),
+	'B' : set(['0', '2']),
+	'C' : set(['2', '3', '4']),
+	'D' : set(['A', 'B', '2']),
+	'E' : set(['3', '4', 'B']),
+	} 
+
+	bfs(visited, graph, 'C')
