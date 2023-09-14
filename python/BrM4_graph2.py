@@ -18,11 +18,11 @@ def bfs(visited, graph, node):
 if __name__ == '__main__':
 
 	graph = {
-	'A' : set(['0', '1']),
-	'B' : set(['0', '2']),
-	'C' : set(['2', '3', '4']),
-	'D' : set(['A', 'B', '2']),
-	'E' : set(['3', '4', 'B']),
+	'A' : set(['B', 'C']),
+	'B' : set(['A', 'E']),
+	'C' : set(['A']),
+	'D' : set(['A', 'B', 'E']),
+	'E' : set(['B']),
 	} 
 
 	bfs(visited, graph, 'C')
