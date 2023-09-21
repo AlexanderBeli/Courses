@@ -36,7 +36,7 @@ if re.search(r'[^a-zA-Zа-яА-Я]',a ):
 else:
     print("ok")'''
 
-with open('abbreviation.txt', 'r', encoding='utf-8') as f:
+'''with open('abbreviation.txt', 'r', encoding='utf-8') as f:
 	type_data = f.read()
 
 print(type_data)
@@ -46,4 +46,13 @@ check_type_w = 'adv'
 if check_type_w in type_data:
 	print('Yes')
 else:
-	print('No')
+	print('No')'''
+
+step = input('Do you want to add the new word to the English dictionary? Use yes/no: ')
+print(step)
+
+if step in ('yes', 'y'):
+	name = input('Please type here the word that you want to add to the dictionary: ')
+
+	#осуществим проверку
+	print("Now we'll check it")

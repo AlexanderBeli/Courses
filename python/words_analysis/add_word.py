@@ -13,6 +13,11 @@ if __name__ == "__main__":
 with open(dict_source, 'rb') as f:
 	dict_data = pickle.load(f)
 
+posetive_answers = ('yes', 'y')
+negative_answers = ('no', 'n')
+middle_message = ("We're checking that ")
+final_message = "There is no another option here. You may restart the program or connect to the developers. Goodbye! "
+
 class Check:
 	def __init__(self, stroke):
 		self.stroke = stroke
@@ -42,11 +47,6 @@ class Check:
 			else:
 			     print('The correct list of words')
 
-#			if word.isalpha():
-#				print('The correct list of words')
-#			else:				
-#				print('The list of words consists of special characters. Please check the list and try again.')
-
 	#проверяем слово на наличие в словаре
 	def check_key_word(self, name, dict_data):
 		self.name = name
@@ -73,21 +73,51 @@ class Check:
 	#Стал использовать pickle 21.09.2023
 
 
-name = input('Please type here the word, which you want to add to the dict: ')
+#Логика процесса
+step = input('Do you want to add the new word to the English dictionary? Use yes/no: ')
+print(step)
 
-word = Check(name)
+if step in posetive_answers:
+	name = input('Please type here the word that you want to add to the dictionary: ')
+
+	#осуществим проверку
+	print(middle_message)
+
+elif step in negative_answers:
+	step2 = input('Do you want to add some extra information or collocations to the existant word in the English dictionary? Use yes/no: ')
+
+	if step2 in posetive_answers:
+		step3 = input('Do you want to add the meaning of the existant word in the English dictionary? Use yes/no: ')
+
+		if step3 in posetive_answers:
+			name2 = input('Please type here the word that you want to add the meaning: ')
+
+			#осуществим проверку
+			print(middle_message)
+
+		else:
+			step4 = input('Do you want to add collocations to the existant word in the English dictionary? Use yes/no: ')
+
+			if step4 in posetive_answers:
+				name3 = input('Please type here the word that you want to add the meaning: ')
+				#осуществим проверку
+				print(middle_message)
+
+			else:
+				print(final_message)
+	else:
+		print(final_message)
+else:
+	print(final_message)
+
+
+
+'''word = Check(name)
 word.check_w(name)
 word.check_key_word(name, dict_data)
-#print(name.isalpha())
-word.check_w(name)
-print(word)
-'''if name.isalpha():
-	print('correct word')
-#	return word
-else:				
-	print('not word')
-'''#	return None
-'''
+print(word)'''
+
+
 #нужно перепроверить веденное слово - есть ли оно в словаре
 # ответ да/нет
 # нет - продолжаем процесс
@@ -102,9 +132,11 @@ else:
 
 #нужно спросить откуда поступает база - вручную ввводим или из файла 
 
+
+'''
 way = input('Do you want to download the data from the file? Use yes/no: ')
 if way == 'yes':
-#спросить к каой категории относится список слов, испльзовать утвержденный список
+#спросить к какой категории относится список слов, испльзовать утвержденный список
 #проверить его ответ по abbreviation.txt. Если категории нет в списке, выдать оповещение - "категории нет в списке, свяжитесь с разработчиком" и оборвать процесс
 	
 	...
@@ -143,24 +175,4 @@ if name not in eng_dict.keys():
 else:
 	print(name, " already exists")
 
-
-with open('eng_dict.json', 'w', encoding='utf-8') as f:
-	json.dump(eng_dict, f)
-
-#print(eng_dict)
-#import pickle
-
-#my_pickled_object = pickle.dumps(nouns)
-#print(f"This is my pickled object:\n{my_pickled_object}\n")
-
-#my_unpickled_object = pickle.loads(my_pickled_object)
-#print(f"This is my unpickled object:\n{my_unpickled_object}\n")
-
-#with open('important','wb') as file:
-#	pickle.dump(nouns, file)
-
-#with open('important','rb') as file:
-#	data = pickle.load(file)
-
-#print(data)
 '''
