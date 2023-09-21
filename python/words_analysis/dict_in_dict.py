@@ -19,25 +19,49 @@ with open('eng_dict.json','w',encoding='utf-8') as f:
 
 
 #list of words to set of words
-for w, v in eng_dict.items():
+'''for w, v in eng_dict.items():
 	for i, k in v.items():
 		l = set(k)
 		eng_dict[w][i] = l
 
-new_eng_dict = eng_dict
+new_eng_dict = eng_dict'''
 #print(new_eng_dict)
 #Object of type set is not JSON serializable
 
 #with open('eng_dict.pickle','wb') as f:
 #	pickle.dump(new_eng_dict, f)
 
+'''with open('eng_dict.pickle','rb') as f:
+	pickle_eng_dict = pickle.load(f)
+
+print(pickle_eng_dict)
+print(type(pickle_eng_dict))'''
+
+
+
+'''#add 'meaning' and 'collocations'
+with open('eng_dict.pickle','rb') as f:
+	pickle_eng_dict = pickle.load(f)
+
+add_meaning = {'abbreviation':'description'}
+add_collocations = 'collocations'
+for w, v in pickle_eng_dict.items():
+#	print(w)
+	pickle_eng_dict[w] = {add_collocations:v}
+
+#print(pickle_eng_dict)
+#print(pickle_eng_dict['key']['collocations']['n'])
+
+for w, v in pickle_eng_dict.items():
+#	print(w)
+	pickle_eng_dict[w]['meaning'] = add_meaning
+
+print(pickle_eng_dict['key']['meaning']['abbreviation'])
+
+with open('eng_dict.pickle','wb') as file:
+	pickle.dump(pickle_eng_dict, file)'''
+
 with open('eng_dict.pickle','rb') as f:
 	pickle_eng_dict = pickle.load(f)
 
 print(pickle_eng_dict)
-print(type(pickle_eng_dict))
-
-
-
-#add 'meaning'
-
