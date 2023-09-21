@@ -1,7 +1,7 @@
 name ='key'
 name2 ='important'
 name3 ='significant'
-file = 'results.txt'
+file = f'results_{name}_{name2}_{name3}.txt'
 
 def sor_lis(x):
 	return sorted(list(x))

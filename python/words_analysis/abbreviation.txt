@@ -1,0 +1,7 @@
+n
+adj
+v
+adv
+pron
+phr_v
+idiom
