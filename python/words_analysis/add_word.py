@@ -15,15 +15,16 @@ with open(dict_source, 'rb') as f:
 
 posetive_answers = ('yes', 'y')
 negative_answers = ('no', 'n')
-middle_message = ("We're checking that ")
+middle_message = "We're checking that "
 final_message = "There is no another option here. You may restart the program or connect to the developers. Goodbye! "
+result_message = "We've added it to the dictionary. "
 
 class Check:
 	def __init__(self, stroke):
 		self.stroke = stroke
 
 		if not isinstance(stroke, str):
-			print("It's not a string. Please check what you type.")
+			print("It's not a string. Please check what you typed.")
 			return None
 
 	#проверка на корректность ввода слова/ слов
@@ -37,15 +38,15 @@ class Check:
 			if re.search(r'[^a-zA-Z]',word ):
 			     print("'It's not the word. Please try again")
 			else:
-			     print('correct word')
+			     return 1
 
 		else:
 			word = word.replace(' ','').replace('↑','').replace(',','')
 
 			if re.search(r'[^a-zA-Z]',word ):
-			     print('The list of words consists of special characters or numbers. Please check the list and try again.')
+			     print('The list of words or text consists of special characters or numbers. Please check the list or text and try again.')
 			else:
-			     print('The correct list of words')
+			     return 1
 
 	#проверяем слово на наличие в словаре
 	def check_key_word(self, name, dict_data):
@@ -63,25 +64,126 @@ class Check:
 			type_data = f.read()
 
 		if w_type in type_data:
-			print('Yes')
+			return 1
 		else:
-			print('No')
+			print("The category ", w_type, "doesn't exist. Please try again or check the categories. ")
 
+	def check_collocations_in_category(self, data, category)
+		self.data = data
+		self.data = category
 	#можно перепроверить введенные слова на их наличие
 	#а можно преобразовать словарь в формат множества, тогда при добавлении будут просто добавляться новые слова, исключаем вероятность повторения
 	#Object of type set is not JSON serializable
 	#Стал использовать pickle 21.09.2023
 
+class Query():
+	def __init__(self, stroke):
+		self.stroke = stroke
+
+	def key_word_step(self, ans):
+		self.ans = ans
+
+		name = input('Please type here the WORD that you want to add to the dictionary: ')
+		print(middle_message)
+
+		#осуществим проверку
+		if name not in dict_data.keys():
+			check_in = Check(name)
+			if check_in.check_w(name) == 1:
+				dict_data[name] = 'a new word in the dictionary'
+				print(result_message)
+		
+		else:
+			print(name, " already exists. Try again. ")
+
+	def add_meaning_step(self, ans):
+		self.ans = ans
+
+		name = input('Please type here the WORD that you want to add the meaning: ')		
+		print(middle_message)
+
+		#осуществим проверку
+		if name in dict_data.keys():
+			category = input(f"Please type the CATEGORY of the {name} here: ")
+			check_in = Check(category)
+			if check_in.check_type(category) == 1:
+				meaning = input(f"Please type the MEANING of the {name} here: ")
+				if check_in.check_w(meaning) == 1:
+					dict_data[name]['meaning'][category] = meaning
+					print(result_message)
+
+		else:
+			print(name, "is not in the dictionary. Please try again or recheck the word. ")
+
+	def add_collocations_step(self, ans):
+		self.ans = ans
+
+		name = input('Please type here the WORD that you want to add the collocations: ')		
+		print(middle_message)
+
+		#осуществим проверку
+		if name in dict_data.keys():
+			category = input(f"Please type the CATEGORY of the collocations here: ")
+			check_in = Check(category)
+			if check_in.check_type(category) == 1:
+				collocations_request = input("Do you want to download the collocations from the file? Use yes/no: ")
+
+				if collocations_request in posetive_answers:
+					with open(file_source, 'r', encoding='utf-8') as collocations_source:
+						collocations_data = collocations_source.read()
+
+					if check_in.check_w(collocations_data) == 1:
+						#нужно преобразовать в set через запятые и добавить в словарь
+						collocations_data = collocations_data.replace('↑','').replace(', ',',')
+						set_collocations_data = set(collocations_data.split(','))
+
+						if check_in.check_collocations_in_category(set_collocations_data, category) == 1:
+							dict_data[name]['collocations'][category] = set_collocations_data
+							print(result_message)
+
+				elif collocations_request in negative_answers:
+
+					collocations = input(f"Please type the COLLOCATIONS of the {name} here using ',' and blank space: ")
+			
+					if check_in.check_w(collocations) == 1:
+						#нужно преобразовать в set через запятые и добавить в словарь
+						collocations = collocations.replace('↑','').replace(', ',',')
+						set_collocations = set(collocations.split(','))
+
+						if check_in.check_collocations_in_category(set_collocations, category) == 1:
+							dict_data[name]['collocations'][category] = set_collocations
+							print(result_message)
+				else:
+					print("Your answer to the question is wrong. Please try again. ")
+		else:
+			print(name, " is not in the dictionary. Please try again or recheck the word. ")
+
+#след усовуршенствованная логика процесса Update 3.0
+while True:
+	step7 = input("What do you want to do? Type the one of the next commands: add, change, delete or exit. ")
+
+	if step7 == 'add':
+		print(middle_message)
+
+	elif step7 == 'change':
+		print(middle_message)
+
+	elif step7 == 'delete':
+		print(middle_message)
+
+	elif step7 == 'exit':
+		break
+
+	else:
+		print(final_message)
+		break
 
 #Логика процесса
 step = input('Do you want to add the new word to the English dictionary? Use yes/no: ')
-print(step)
+process_one = Query(step)
 
-if step in posetive_answers:
-	name = input('Please type here the word that you want to add to the dictionary: ')
-
-	#осуществим проверку
-	print(middle_message)
+if step in posetive_answers:	
+	process_one.key_word_step(step)
 
 elif step in negative_answers:
 	step2 = input('Do you want to add some extra information or collocations to the existant word in the English dictionary? Use yes/no: ')
@@ -90,18 +192,13 @@ elif step in negative_answers:
 		step3 = input('Do you want to add the meaning of the existant word in the English dictionary? Use yes/no: ')
 
 		if step3 in posetive_answers:
-			name2 = input('Please type here the word that you want to add the meaning: ')
-
-			#осуществим проверку
-			print(middle_message)
+			process_one.add_meaning_step(step3)
 
 		else:
 			step4 = input('Do you want to add collocations to the existant word in the English dictionary? Use yes/no: ')
 
 			if step4 in posetive_answers:
-				name3 = input('Please type here the word that you want to add the meaning: ')
-				#осуществим проверку
-				print(middle_message)
+				process_one.add_collocations_step(step4)
 
 			else:
 				print(final_message)
@@ -109,14 +206,6 @@ elif step in negative_answers:
 		print(final_message)
 else:
 	print(final_message)
-
-
-
-'''word = Check(name)
-word.check_w(name)
-word.check_key_word(name, dict_data)
-print(word)'''
-
 
 #нужно перепроверить веденное слово - есть ли оно в словаре
 # ответ да/нет
@@ -149,30 +238,11 @@ else:
 	print("You didn't answer correctly. Please, restart the program")
 	return None
 
-
-
-with open(file_source, 'r', encoding='utf-8') as f:
-	n = f.read()
-
-print(type(n))
-
 n = n.replace('↑','').replace(',','')
 n = n.split()
 
 #nouns = set(n)	#для создания множества
 
 #eng_dict = {name:n}
-
-import json
-
-with open('eng_dict.json', 'r', encoding='utf-8') as f:
-	eng_dict = json.load(f)
-
-if name not in eng_dict.keys():
-	eng_dict[name] = n
-	print("added ", name)
-#	print(eng_dict)
-else:
-	print(name, " already exists")
 
 '''

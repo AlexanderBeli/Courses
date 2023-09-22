@@ -48,11 +48,26 @@ if check_type_w in type_data:
 else:
 	print('No')'''
 
-step = input('Do you want to add the new word to the English dictionary? Use yes/no: ')
-print(step)
+'''name = "mother, son, ball and bicicle, 123"
+name = name.replace(', ',',')
+test = set(name.split(','))
+print(test)'''
 
-if step in ('yes', 'y'):
-	name = input('Please type here the word that you want to add to the dictionary: ')
+middle_message = "We're checking that "
+while True:
+	step7 = input("What do you want to do? Type the one of the next commands: add, change, delete or exit. ")
 
-	#осуществим проверку
-	print("Now we'll check it")
+	if step7 == 'add':
+		print(middle_message)
+
+	elif step7 == 'change':
+		print(middle_message)
+
+	elif step7 == 'delete':
+		print(middle_message)
+
+	elif step7 == 'exit':
+		break
+
+	else:
+		break
