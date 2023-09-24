@@ -1,4 +1,19 @@
 #Цель - добавить список слов в словарь
+
+#нужно перепроверить веденное слово - есть ли оно в словаре
+# ответ да/нет
+# нет - продолжаем процесс
+# да - выдаем информацию, что оно есть в словаре
+	#спрашиваем, какую категорию хочет добавить
+	#проверяем категорию по abbreviation.txt и по наличию категории в словаре
+		#Если категории нет в списке, выдать оповещение - "категории нет в списке, свяжитесь с разработчиком" и оборвать процесс
+		#Если категория есть в списке, выдать оповещение "категория есть в списке" и "добавьте слова"/загружайте слова
+		#Если категория есть в списке и есть в словаре - выдать информацию "Категория уже есть в словаре. Возможно слова, которые вы хотите добавить, уже находятся в словаре"
+			#Сделать проверку, есть ли слова в словаре в данной категории
+				#Если нет, то добавить
+
+#нужно спросить откуда поступает база - вручную ввводим или из файла 
+
 import json
 import pickle
 import re
@@ -18,6 +33,7 @@ negative_answers = ('no', 'n')
 middle_message = "We're checking that "
 final_message = "There is no another option here. You may restart the program or connect to the developers. Goodbye! "
 result_message = "We've added it to the dictionary. "
+choice_message = "Please choose and write one of the next categories: word, meaning, collocations, categories"
 
 class Check:
 	def __init__(self, stroke):
@@ -34,7 +50,7 @@ class Check:
 		#две ситуации
 		#передано ключевое слово
 		#передан список
-		if len(word.split()) == 1:
+		if len(word.split(',')) == 1:
 			if re.search(r'[^a-zA-Z]',word ):
 			     print("'It's not the word. Please try again")
 			else:
@@ -68,9 +84,22 @@ class Check:
 		else:
 			print("The category ", w_type, "doesn't exist. Please try again or check the categories. ")
 
-	def check_collocations_in_category(self, data, category)
-		self.data = data
-		self.data = category
+	def check_collocations_in_category(self, name, category, data):
+		self.name = name
+		self.category = category
+		self.data = data		
+
+		if category in dict_data[name]['collocations'].keys():
+			print(middle_message)
+			inter_data = dict_data[name]['collocations'][category]
+			inter_data_result = inter_data.union(data)
+			dict_data[name]['collocations'][category] = inter_data_result
+			print(result_message)
+			print(dict_data[name]['collocations'][category])
+		else:
+			dict_data[name]['collocations'][category] = data
+			print(result_message)
+			print(dict_data[name]['collocations'][category])
 	#можно перепроверить введенные слова на их наличие
 	#а можно преобразовать словарь в формат множества, тогда при добавлении будут просто добавляться новые слова, исключаем вероятность повторения
 	#Object of type set is not JSON serializable
@@ -130,16 +159,17 @@ class Query():
 
 				if collocations_request in posetive_answers:
 					with open(file_source, 'r', encoding='utf-8') as collocations_source:
-						collocations_data = collocations_source.read()
+						collocations = collocations_source.read()
 
-					if check_in.check_w(collocations_data) == 1:
+					if check_in.check_w(collocations) == 1:
 						#нужно преобразовать в set через запятые и добавить в словарь
-						collocations_data = collocations_data.replace('↑','').replace(', ',',')
-						set_collocations_data = set(collocations_data.split(','))
+						collocations = collocations.replace('↑','').replace(', ',',')
+						set_collocations = set(collocations.split(','))
 
-						if check_in.check_collocations_in_category(set_collocations_data, category) == 1:
-							dict_data[name]['collocations'][category] = set_collocations_data
-							print(result_message)
+						print(name, category, set_collocations)
+						#if check_in.check_collocations_in_category(name, category, set_collocations) == 1:
+						#	dict_data[name]['collocations'][category] = set_collocations
+						#	print(result_message)							
 
 				elif collocations_request in negative_answers:
 
@@ -150,35 +180,96 @@ class Query():
 						collocations = collocations.replace('↑','').replace(', ',',')
 						set_collocations = set(collocations.split(','))
 
-						if check_in.check_collocations_in_category(set_collocations, category) == 1:
-							dict_data[name]['collocations'][category] = set_collocations
-							print(result_message)
+						print(name, category, set_collocations)
+						check_in.check_collocations_in_category(name, category, set_collocations)
 				else:
 					print("Your answer to the question is wrong. Please try again. ")
 		else:
 			print(name, " is not in the dictionary. Please try again or recheck the word. ")
 
 #след усовуршенствованная логика процесса Update 3.0
+
 while True:
-	step7 = input("What do you want to do? Type the one of the next commands: add, change, delete or exit. ")
+	step = input("What do you want to do? Type the one of the next commands: show, add, change, delete or exit. ")
+	process = Query(step)
 
-	if step7 == 'add':
-		print(middle_message)
+	if step == 'show':
+		step2 = input(choice_message)
+			if step2 == 'word':
+				print(middle_message)
 
-	elif step7 == 'change':
-		print(middle_message)
+			elif step2 == 'meaning':
+				print(middle_message)
 
-	elif step7 == 'delete':
-		print(middle_message)
+			elif step2 == 'collocations':
+				print(middle_message)
 
-	elif step7 == 'exit':
+			elif step2 == 'categories':
+				print(middle_message)
+
+			else:
+ 				print(final_message)
+
+	elif step == 'add':
+		step2 = input(choice_message)
+			if step2 == 'word':
+				print(middle_message)
+
+			elif step2 == 'meaning':
+				print(middle_message)
+
+			elif step2 == 'collocations':
+				print(middle_message)
+				process.add_collocations_step(step)
+				
+			elif step2 == 'categories':
+				print(middle_message)
+
+			else:
+ 				print(final_message)
+
+	elif step == 'change':
+		step2 = input(choice_message)
+			if step2 == 'word':
+				print(middle_message)
+
+			elif step2 == 'meaning':
+				print(middle_message)
+
+			elif step2 == 'collocations':
+				print(middle_message)
+
+			elif step2 == 'categories':
+				print(middle_message)
+
+			else:
+ 				print(final_message)
+
+	elif step == 'delete':
+		step2 = input(choice_message)
+			if step2 == 'word':
+				print(middle_message)
+
+			elif step2 == 'meaning':
+				print(middle_message)
+
+			elif step2 == 'collocations':
+				print(middle_message)
+
+			elif step2 == 'categories':
+				print(middle_message)
+
+			else:
+ 				print(final_message)
+
+	elif step == 'exit':
 		break
 
 	else:
 		print(final_message)
 		break
-
-#Логика процесса
+'''
+#Логика процесса Update 2.0
 step = input('Do you want to add the new word to the English dictionary? Use yes/no: ')
 process_one = Query(step)
 
@@ -206,43 +297,4 @@ elif step in negative_answers:
 		print(final_message)
 else:
 	print(final_message)
-
-#нужно перепроверить веденное слово - есть ли оно в словаре
-# ответ да/нет
-# нет - продолжаем процесс
-# да - выдаем информацию, что оно есть в словаре
-	#спрашиваем, какую категорию хочет добавить
-	#проверяем категорию по abbreviation.txt и по наличию категории в словаре
-		#Если категории нет в списке, выдать оповещение - "категории нет в списке, свяжитесь с разработчиком" и оборвать процесс
-		#Если категория есть в списке, выдать оповещение "категория есть в списке" и "добавьте слова"/загружайте слова
-		#Если категория есть в списке и есть в словаре - выдать информацию "Категория уже есть в словаре. Возможно слова, которые вы хотите добавить, уже находятся в словаре"
-			#Сделать проверку, есть ли слова в словаре в данной категории
-				#Если нет, то добавить
-
-#нужно спросить откуда поступает база - вручную ввводим или из файла 
-
-
-'''
-way = input('Do you want to download the data from the file? Use yes/no: ')
-if way == 'yes':
-#спросить к какой категории относится список слов, испльзовать утвержденный список
-#проверить его ответ по abbreviation.txt. Если категории нет в списке, выдать оповещение - "категории нет в списке, свяжитесь с разработчиком" и оборвать процесс
-	
-	...
-elif way == 'no':
-#предлагаем ввести слова через запятую с пробелом
-#нужно перепроверить введенные слова на отсутствие русских букв, спец символов
-#сохранить список в source.txt на случай, чтобы потом перепроверить данные. Возможно, добавляя в название файла ключевое слово, для которого вводим данные
-	...
-else:
-	print("You didn't answer correctly. Please, restart the program")
-	return None
-
-n = n.replace('↑','').replace(',','')
-n = n.split()
-
-#nouns = set(n)	#для создания множества
-
-#eng_dict = {name:n}
-
 '''

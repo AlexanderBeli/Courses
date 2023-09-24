@@ -52,22 +52,10 @@ else:
 name = name.replace(', ',',')
 test = set(name.split(','))
 print(test)'''
-
-middle_message = "We're checking that "
-while True:
-	step7 = input("What do you want to do? Type the one of the next commands: add, change, delete or exit. ")
-
-	if step7 == 'add':
-		print(middle_message)
-
-	elif step7 == 'change':
-		print(middle_message)
-
-	elif step7 == 'delete':
-		print(middle_message)
-
-	elif step7 == 'exit':
-		break
-
-	else:
-		break
+dict_data = {'key':{'collocations':{'category':'n'}}}
+dict_data['key']['collocations']['category'] = {'moment', 'key','123'}
+data = {'123', 'ppp', 'moment'}
+inter_data = dict_data['key']['collocations']['category']
+inter_data_result = inter_data.union(data)
+dict_data['key']['collocations']['category'] = inter_data_result
+print(dict_data)
