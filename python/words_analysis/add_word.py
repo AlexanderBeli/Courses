@@ -37,6 +37,8 @@ middle_message = "We're checking that "
 final_message = "There is no another option here. You may restart the program or connect to the developers. Goodbye! "
 error_message = "There is no such relevant information in the dictionary. Please check what your wrote and try again. "
 result_message = "We've added it to the dictionary. "
+del_suc_message = "We've removed it"
+ch_suc_message = "We've changed it"
 choice_message = "Please choose and write one of the next categories: word, meaning, collocations, categories "
 choice_answer_word = ('word', 'wor', 'wo', 'w')
 choice_answer_meaning = ('meaning', 'meanin', 'meani', 'mean', 'mea', 'me','m')
@@ -93,22 +95,15 @@ class Check:
 		else:
 			print("The category ", w_type, " doesn't exist. Please try again or check the categories. ")
 
-	def check_collocations_in_category(self, name, category, data):
+	def check_collocations_in_category(self, name, category):
 		self.name = name
-		self.category = category
-		self.data = data		
+		self.category = category		
 
 		if category in dict_data[name]['collocations'].keys():
-			print(middle_message)
-			inter_data = dict_data[name]['collocations'][category]
-			inter_data_result = inter_data.union(data)
-			dict_data[name]['collocations'][category] = inter_data_result
-			print(result_message)
-			print(dict_data[name]['collocations'][category])
+			return 1
 		else:
-			dict_data[name]['collocations'][category] = data
-			print(result_message)
-			print(dict_data[name]['collocations'][category])
+			return 0
+			
 	#можно перепроверить введенные слова на их наличие
 	#а можно преобразовать словарь в формат множества, тогда при добавлении будут просто добавляться новые слова, исключаем вероятность повторения
 	#Object of type set is not JSON serializable
@@ -173,6 +168,8 @@ class AddVoc:
 			check_in = Check(name)
 			if check_in.check_w(name) == 1:
 				dict_data[name] = 'a new word in the dictionary'
+				with open(dict_source, 'wb') as upload_new_word:
+					pickle.dump(dict_data, upload_new_word)
 				print(result_message)
 		
 		else:
@@ -192,6 +189,8 @@ class AddVoc:
 				meaning = input(f"Please type the MEANING of the {name} here: ")
 				if check_in.check_w(meaning) == 1:
 					dict_data[name]['meaning'][category] = meaning
+					with open(dict_source, 'wb') as upload_new_meaning:
+						pickle.dump(dict_data, upload_new_meaning)
 					print(result_message)
 
 		else:
@@ -205,10 +204,11 @@ class AddVoc:
 
 		#осуществим проверку
 		if name in dict_data.keys():
-			category = input(f"Please type the CATEGORY of the collocations here: ")
+			category = input("Please type the CATEGORY of the collocations here: ")
 			check_in = Check(category)
 			if check_in.check_type(category) == 1:
 				collocations_request = input("Do you want to download the collocations from the file? Use yes/no: ")
+				set_collocations = 0
 
 				if collocations_request in posetive_answers:
 					with open(file_source, 'r', encoding='utf-8') as collocations_source:
@@ -217,12 +217,7 @@ class AddVoc:
 					if check_in.check_w(collocations) == 1:
 						#нужно преобразовать в set через запятые и добавить в словарь
 						collocations = collocations.replace('↑','').replace(', ',',')
-						set_collocations = set(collocations.split(','))
-
-						print(name, category, set_collocations)
-						#if check_in.check_collocations_in_category(name, category, set_collocations) == 1:
-						#	dict_data[name]['collocations'][category] = set_collocations
-						#	print(result_message)							
+						set_collocations = set(collocations.split(','))						
 
 				elif collocations_request in negative_answers:
 
@@ -232,13 +227,25 @@ class AddVoc:
 						#нужно преобразовать в set через запятые и добавить в словарь
 						collocations = collocations.replace('↑','').replace(', ',',')
 						set_collocations = set(collocations.split(','))
-
-						print(name, category, set_collocations)
-						check_in.check_collocations_in_category(name, category, set_collocations)
 				else:
 					print("Your answer to the question is wrong. Please try again. ")
+
+				#проверяем наличие и добавляем
+				if set_collocations != 0:
+					if check_in.check_collocations_in_category(name, category) == 1:
+						inter_data = dict_data[name]['collocations'][category]
+						inter_data_result = inter_data.union(set_collocations)
+						dict_data[name]['collocations'][category] = inter_data_result
+						with open(dict_source, 'wb') as upload_new_collocations:
+							pickle.dump(dict_data, upload_new_collocations)
+						print(result_message)
+					else:
+						dict_data[name]['collocations'][category] = set_collocations
+						with open(dict_source, 'wb') as upload_new_collocations:
+							pickle.dump(dict_data, upload_new_collocations)
+						print(result_message)
 		else:
-			print(name, " is not in the dictionary. Please try again or recheck the word. ")
+			print(name, " is not in the dictionary. Please try again or add the word first. ")
 
 	def add_category_step(self, ans):
 		self.ans = ans
@@ -265,6 +272,71 @@ class ChangeVoc:
 			print("It's not a string. Please check what you typed.")
 			return None
 
+	def change_word(self, ans):
+		self.ans = ans
+
+		change_info = input("Write the WORD you want to change: ")
+
+		if change_info in dict_data.keys():
+			change_string = input("Write the correct WORD: ")
+			check_in.Check(change_string)
+			if check_in.check_w(change_string) == 1:
+				change_data = {change_string:dict_data[change_info]}
+				dict_data.pop(change_info)
+				dict_data[change_data]
+				with open(dict_source, 'wb') as change_word:
+					pickle.dump(dict_data, change_word)
+				print(ch_suc_message)
+		else:
+			print(error_message)
+
+	def change_meaning(self, ans):
+		self.ans = ans
+
+		change_info = input("Write the WORD that meaning you want to change: ")
+
+		if change_info in dict_data.keys():
+			extra_info = input("Write the CATEGORY the meaning you want to change: ")
+			if extra_info in dict_data[change_info]['meaning'].keys():
+				print(dict_data[change_info]['meaning'][extra_info])
+				new_meaning = input("Write the new MEANING: ")
+				dict_data[change_info]['meaning'][extra_info] = new_meaning
+				with open(dict_source, 'wb') as change_meaning:
+					pickle.dump(dict_data, change_meaning)
+				print(ch_suc_message)
+			else:
+				print(error_message)
+		else:
+			print(error_message)
+
+	def change_collocations(self, ans):
+		self.ans = ans
+
+		change_info = input("Write the WORD that collocations you want to change: ")
+
+		if change_info in dict_data.keys():
+			extra_info = input("Write the CATEGORY the collocations you want to change: ")
+			if extra_info in dict_data[change_info]['collocations'].keys():
+				changing_set = dict_data[change_info]['collocations'][extra_info]
+				changing_list = sorted(list(dict_data[change_info]['collocations'][extra_info]))
+				print(changing_list)	
+				while True:
+					new_change_request = input("Write the WORD from the list which you want to change. If you want to replace the whole list, first delete and than add it. For going out write 'exit': ")
+					if new_change_request in changing_set:
+						changing_word = input("Write the correct word: ")
+						check_in = Check(changing_word)
+						if check_in.check_w(changing_word) == 1:
+							changing_set.remove(new_change_request)
+							changing_set.add(changing_word)
+							dict_data[change_info]['collocations'][extra_info] = changing_set
+							with open(dict_source, 'wb') as change_collocations:
+								pickle.dump(dict_data, change_collocations)
+					else:
+						break
+			else:
+				print(error_message)
+		else:
+			print(error_message)
 
 class DeleteVoc:
 	def __init__(self, stroke):
@@ -274,10 +346,55 @@ class DeleteVoc:
 			print("It's not a string. Please check what you typed.")
 			return None
 
+	def del_word(self, ans):
+		self.ans = ans
+
+		del_info = input("Write the WORD that you want to delete from the dictionary: ")
+
+		if del_info in dict_data.keys():
+			dict_data.pop(del_info)
+			with open(dict_source, 'wb') as del_word:
+				pickle.dump(dict_data, del_word)
+			print(del_suc_message)
+		else:
+			print(error_message)
+
+	def del_meaning(self, ans):
+		self.ans = ans
+
+		del_info = input("Write the WORD that meaning you want to delete from the dictionary: ")
+
+		if del_info in dict_data.keys():
+			extra_info = input("Write the CATEGORY that with the meaning you want to delete from the dictionary: ")
+			if extra_info in dict_data[del_info]['meaning'].keys():
+				dict_data[del_info]['meaning'].pop(extra_info)
+				with open(dict_source, 'wb') as del_word:
+					pickle.dump(dict_data, del_word)
+				print(del_suc_message)
+			else:
+				print("The category is not on the list. ")
+		else:
+			print(error_message)
+
+	def del_collocations(self, ans):
+		self.ans = ans
+
+		del_info = input("Write the WORD that collocations you want to delete from the dictionary: ")
+
+		if del_info in dict_data.keys():
+			extra_info = input("Write the CATEGORY that with the collocations you want to delete from the dictionary: ")
+			if extra_info in dict_data[del_info]['collocations'].keys():
+				dict_data[del_info]['collocations'].pop(extra_info)
+				with open(dict_source, 'wb') as del_word:
+					pickle.dump(dict_data, del_word)
+				print(del_suc_message)
+			else:
+				print("The category is not on the list. ")
+
 	def del_category(self, ans):
 		self.ans = ans
 
-		del_info = input("Write the category that you want to delete from the list: ")
+		del_info = input("Write the CATEGORY that you want to delete from the list: ")
 		list_category = category_list_data.split(f'\n')
 		if del_info in list_category:
 			new_category_list_data = category_list_data.replace(f'{del_info}\n', '')
@@ -285,7 +402,7 @@ class DeleteVoc:
 
 			with open(type_source, 'w', encoding='utf-8') as new_category_list:
 				new_category_list.write(new_category_list_data)
-				print("The category ", del_info, " has removed. ")
+			print(del_suc_message)
 		else:
 			print(error_message)
 
@@ -348,14 +465,19 @@ while True:
 
 	elif step in first_answer_change:
 		step2 = input(choice_message)
+		process = ChangeVoc(step)
+
 		if step2 in choice_answer_word:
 			print(middle_message)
+			process.change_word(step2)
 
 		elif step2 in choice_answer_meaning:
 			print(middle_message)
+			process.change_meaning(step2)
 
 		elif step2 in choice_answer_collocations:
 			print(middle_message)
+			process.change_collocations(step2)
 
 		elif step2 in choice_answer_category:
 			print(middle_message)
@@ -369,12 +491,15 @@ while True:
 
 		if step2 in choice_answer_word:
 			print(middle_message)
+			process.del_word(step2)
 
 		elif step2 in choice_answer_meaning:
 			print(middle_message)
+			process.del_meaning(step2)
 
 		elif step2 in choice_answer_collocations:
 			print(middle_message)
+			process.del_collocations(step2)
 
 		elif step2 in choice_answer_category:
 			print(middle_message)
