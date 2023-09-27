@@ -331,12 +331,30 @@ class ChangeVoc:
 							dict_data[change_info]['collocations'][extra_info] = changing_set
 							with open(dict_source, 'wb') as change_collocations:
 								pickle.dump(dict_data, change_collocations)
+							print(ch_suc_message)
 					else:
 						break
 			else:
 				print(error_message)
 		else:
 			print(error_message)
+
+	def change_category(self, ans):
+		self.ans = ans
+
+		change_info = input("Write the CATEGORY you want to change: ")
+		list_category = category_list_data.split(f'\n')
+		if change_info in list_category:
+			fixed_category = input("Write the CORRECT version of CATEGORY you want to add: ")
+			new_category_list_data = category_list_data.replace(f'{change_info}\n', f'{fixed_category}\n')
+			print(new_category_list_data)
+
+			with open(type_source, 'w', encoding='utf-8') as fixed_category_list:
+				fixed_category_list.write(new_category_list_data)
+			print(ch_suc_message)
+		else:
+			print(error_message)
+
 
 class DeleteVoc:
 	def __init__(self, stroke):
@@ -382,14 +400,32 @@ class DeleteVoc:
 		del_info = input("Write the WORD that collocations you want to delete from the dictionary: ")
 
 		if del_info in dict_data.keys():
-			extra_info = input("Write the CATEGORY that with the collocations you want to delete from the dictionary: ")
+			extra_info = input("Write the CATEGORY the collocations you want to delete from the dictionary: ")
 			if extra_info in dict_data[del_info]['collocations'].keys():
-				dict_data[del_info]['collocations'].pop(extra_info)
-				with open(dict_source, 'wb') as del_word:
-					pickle.dump(dict_data, del_word)
-				print(del_suc_message)
+				del_set = dict_data[del_info]['collocations'][extra_info]
+				del_list = sorted(list(dict_data[del_info]['collocations'][extra_info]))
+				print(del_list)
+				while True:
+					new_del_request = input("Write the WORD from the list which you want to delete. If you want to delete the whole list write 'list'. For going out write 'exit': ")
+					if new_del_request in del_set:
+						del_set.remove(new_del_request)
+						dict_data[del_info]['collocations'][extra_info] = del_set
+						with open(dict_source, 'wb') as del_cols:
+							pickle.dump(dict_data, del_cols)
+						print(del_suc_message)
+
+					elif new_del_request == 'list':
+						dict_data[del_info]['collocations'].pop(extra_info)
+						with open(dict_source, 'wb') as del_cols:
+							pickle.dump(dict_data, del_cols)
+						print(del_suc_message)
+						break
+					else:
+						break
 			else:
 				print("The category is not on the list. ")
+		else:
+			print(error_message)
 
 	def del_category(self, ans):
 		self.ans = ans
@@ -406,7 +442,7 @@ class DeleteVoc:
 		else:
 			print(error_message)
 
-#усовершенствованная логика процесса Update 3.0
+#усовершенствованная логика процесса Update 3.21
 
 while True:
 	with open(dict_source, 'rb') as f:
@@ -481,6 +517,7 @@ while True:
 
 		elif step2 in choice_answer_category:
 			print(middle_message)
+			process.change_category(step2)
 
 		else:
  			print(final_message)
