@@ -18,12 +18,12 @@ import json
 import pickle
 import re
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
-	eng_dict = {}
-	file_source = 'source.txt'
-	dict_source = 'eng_dict.pickle'
-	type_source = 'abbreviation.txt'
+eng_dict = {}
+file_source = 'source.txt'
+dict_source = 'eng_dict.pickle'
+type_source = 'abbreviation.txt'
 
 posetive_answers = ('yes', 'y')
 negative_answers = ('no', 'n')
@@ -442,112 +442,113 @@ class DeleteVoc:
 		else:
 			print(error_message)
 
-#усовершенствованная логика процесса Update 3.21
+#усовершенствованная логика процесса Update 3.3
+if __name__ == "__main__":
 
-while True:
-	with open(dict_source, 'rb') as f:
-		dict_data = pickle.load(f)
+	while True:
+		with open(dict_source, 'rb') as f:
+			dict_data = pickle.load(f)
 
-	with open(type_source, 'r', encoding='utf-8') as category_list:
-		category_list_data = category_list.read()
+		with open(type_source, 'r', encoding='utf-8') as category_list:
+			category_list_data = category_list.read()
 
-	step = input(first_message)
+		step = input(first_message)
 
-	if step in first_answer_show:
-		step2 = input(choice_message)
-		process = ShowVoc(step)
+		if step in first_answer_show:
+			step2 = input(choice_message)
+			process = ShowVoc(step)
 
-		if step2 in choice_answer_word:
-			print(middle_message)
-			process.show_words(step2)
+			if step2 in choice_answer_word:
+				print(middle_message)
+				process.show_words(step2)
 
-		elif step2 in choice_answer_meaning:
-			print(middle_message)
-			process.show_meaning(step2)
+			elif step2 in choice_answer_meaning:
+				print(middle_message)
+				process.show_meaning(step2)
 
-		elif step2 in choice_answer_collocations:
-			print(middle_message)
-			process.show_collocations(step2)
+			elif step2 in choice_answer_collocations:
+				print(middle_message)
+				process.show_collocations(step2)
 
-		elif step2 in choice_answer_category:
-			print(middle_message)
-			process.show_category(step2)
+			elif step2 in choice_answer_category:
+				print(middle_message)
+				process.show_category(step2)
+
+			else:
+	 			print(final_message)
+
+		elif step in first_answer_add:
+			step2 = input(choice_message)
+			process = AddVoc(step)
+
+			if step2 in choice_answer_word:
+				print(middle_message)
+				process.add_key_word_step(step2)
+
+			elif step2 in choice_answer_meaning:
+				print(middle_message)
+				process.add_meaning_step(step2)
+
+			elif step2 in choice_answer_collocations:
+				print(middle_message)
+				process.add_collocations_step(step2)
+
+			elif step2 in choice_answer_category:
+				print(middle_message)
+				process.add_category_step(step2)
+
+			else:
+	 			print(final_message)
+
+		elif step in first_answer_change:
+			step2 = input(choice_message)
+			process = ChangeVoc(step)
+
+			if step2 in choice_answer_word:
+				print(middle_message)
+				process.change_word(step2)
+
+			elif step2 in choice_answer_meaning:
+				print(middle_message)
+				process.change_meaning(step2)
+
+			elif step2 in choice_answer_collocations:
+				print(middle_message)
+				process.change_collocations(step2)
+
+			elif step2 in choice_answer_category:
+				print(middle_message)
+				process.change_category(step2)
+
+			else:
+	 			print(final_message)
+
+		elif step in first_answer_delete:
+			step2 = input(choice_message)
+			process = DeleteVoc(step)
+
+			if step2 in choice_answer_word:
+				print(middle_message)
+				process.del_word(step2)
+
+			elif step2 in choice_answer_meaning:
+				print(middle_message)
+				process.del_meaning(step2)
+
+			elif step2 in choice_answer_collocations:
+				print(middle_message)
+				process.del_collocations(step2)
+
+			elif step2 in choice_answer_category:
+				print(middle_message)
+				process.del_category(step2)
+
+			else:
+	 			print(final_message)
+
+		elif step in first_answer_exit:
+			break
 
 		else:
- 			print(final_message)
-
-	elif step in first_answer_add:
-		step2 = input(choice_message)
-		process = AddVoc(step)
-
-		if step2 in choice_answer_word:
-			print(middle_message)
-			process.add_key_word_step(step2)
-
-		elif step2 in choice_answer_meaning:
-			print(middle_message)
-			process.add_meaning_step(step2)
-
-		elif step2 in choice_answer_collocations:
-			print(middle_message)
-			process.add_collocations_step(step2)
-
-		elif step2 in choice_answer_category:
-			print(middle_message)
-			process.add_category_step(step2)
-
-		else:
- 			print(final_message)
-
-	elif step in first_answer_change:
-		step2 = input(choice_message)
-		process = ChangeVoc(step)
-
-		if step2 in choice_answer_word:
-			print(middle_message)
-			process.change_word(step2)
-
-		elif step2 in choice_answer_meaning:
-			print(middle_message)
-			process.change_meaning(step2)
-
-		elif step2 in choice_answer_collocations:
-			print(middle_message)
-			process.change_collocations(step2)
-
-		elif step2 in choice_answer_category:
-			print(middle_message)
-			process.change_category(step2)
-
-		else:
- 			print(final_message)
-
-	elif step in first_answer_delete:
-		step2 = input(choice_message)
-		process = DeleteVoc(step)
-
-		if step2 in choice_answer_word:
-			print(middle_message)
-			process.del_word(step2)
-
-		elif step2 in choice_answer_meaning:
-			print(middle_message)
-			process.del_meaning(step2)
-
-		elif step2 in choice_answer_collocations:
-			print(middle_message)
-			process.del_collocations(step2)
-
-		elif step2 in choice_answer_category:
-			print(middle_message)
-			process.del_category(step2)
-
-		else:
- 			print(final_message)
-
-	elif step in first_answer_exit:
-		break
-
-	else:
-		print(final_message)
-		break
+			print(final_message)
+			break
