@@ -1,4 +1,5 @@
 n
+n_after
 adj
 v
 adv

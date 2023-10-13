@@ -121,22 +121,73 @@ if __name__ == "__main__":
 				for i in dict_data.keys():
 					if i == word:
 						#print(f"{i} is {word} in dict")
+						#13.10.2023 {'n + n_after', 'adv + v', 'adj + n', 'v + n', 'adj + n_after', 'n + n', 'adv + adj', 'adj + v', 'phr_v + n_after', 'n + v', 'v + n_after', 'phr_v + n'}
 						for k in dict_data[i].keys():
-							for l in dict_data[i][k]['collocations'].keys():
-								if k == 'adj' and l == 'n':
-									for n in sorted(list(dict_data[i][k]['collocations'][l])):
-										print(word, n)
-								if k == 'v' and l == 'n':
-									for n in sorted(list(dict_data[i][k]['collocations'][l])):
-										print(word, n)
+							for o in dict_data[i][k]:
+								if o == 'collocations':
+									for l in dict_data[i][k][o].keys():
+										if k == 'adj' and l == 'n':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'v' and l == 'n':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'n' and l == 'v':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'phr_v' and l == 'n':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'adv' and l == 'v':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'adv' and l == 'adj':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'n' and l == 'n':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'n' and l == 'n_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'adj' and l == 'n_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'v' and l == 'n_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'phr_v' and l == 'n_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
 					if i != word:
 						for k in dict_data[i].keys():
-							for l in dict_data[i][k]['collocations'].keys():
-								if word in tuple(dict_data[i][k]['collocations'][l]):
-									if k == 'adj' and l == 'n':
-										print(i, word)
-									if k == 'v' and l == 'n':
-										print(i, word)
+							for o in dict_data[i][k]:
+								if o == 'collocations':
+									for l in dict_data[i][k][o].keys():
+										if word in tuple(dict_data[i][k][o][l]):
+											if k == 'adj' and l == 'n':
+												print(i, word)
+											if k == 'v' and l == 'n':
+												print(i, word)
+											if k == 'n' and l == 'v':
+												print(i, word)
+											if k == 'phr_v' and l == 'n':
+												print(i, word)
+											if k == 'adv' and l == 'v':
+												print(word, i)
+											if k == 'adv' and l == 'adj':
+												print(i, word)
+											if k == 'n' and l == 'n':
+												print(i, word)
+											if k == 'n' and l == 'n_after':
+												print(word, i)
+											if k == 'adj' and l == 'n_after':
+												print(word, i)
+											if k == 'v' and l == 'n_after':
+												print(word, i)
+											if k == 'phr_v' and l == 'n_after':
+												print(word, i)
+											#13.10.2023 {'n + n_after', 'adv + v', 'adj + n', 'v + n', 'adj + n_after', 'n + n', 'adv + adj', 'adj + v', 'phr_v + n_after', 'n + v', 'v + n_after', 'phr_v + n'}
 
 		else:
 			break

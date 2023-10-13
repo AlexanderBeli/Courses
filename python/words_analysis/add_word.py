@@ -209,7 +209,10 @@ class AddVoc:
 			category = input(category_input)
 			check_in = Check(category)
 			if check_in.check_type(category) == 1:
-				print(dict_data[name][category]['meaning'])
+				if 'meaning' in dict_data[name][category].keys():
+					print(dict_data[name][category]['meaning'])
+				else:
+					dict_data[name][category]['meaning'] = {}
 				meaning = input(f"Please type the EXTRA MEANING of the {name} here: ")
 				#if check_in.check_w(meaning) == 1:
 				if isinstance(dict_data[name][category]['meaning'], str):
@@ -263,9 +266,9 @@ class AddVoc:
 					#проверяем наличие и добавляем
 					if set_collocations != 0:
 						if check_in.check_collocations_in_category(name, category) == 1:
-							inter_data = dict_data[name]['collocations'][category]
+							inter_data = dict_data[name][category]['collocations'][category2]
 							inter_data_result = inter_data.union(set_collocations)
-							dict_data[name]['collocations'][category] = inter_data_result
+							dict_data[name][category]['collocations'][category2] = inter_data_result
 							with open(dict_source, 'wb') as upload_new_collocations:
 								pickle.dump(dict_data, upload_new_collocations)
 							print(result_message)
@@ -288,7 +291,7 @@ class AddVoc:
 			check_in = Check(name)
 			if check_in.check_w(name) == 1:
 				with open(type_source, 'a', encoding='utf-8') as add_category_list:
-					add_category_list.write(f"{name} \n")
+					add_category_list.write(f"{name}\n")
 				print("The category ", name, " has added. ")
 		else:
 			print("The category ", name, "already exists. ")
