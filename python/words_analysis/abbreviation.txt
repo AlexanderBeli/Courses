@@ -6,3 +6,4 @@ adv
 pron
 phr_v
 idiom
+abbreviation unknown

@@ -122,6 +122,7 @@ if __name__ == "__main__":
 					if i == word:
 						#print(f"{i} is {word} in dict")
 						#13.10.2023 {'n + n_after', 'adv + v', 'adj + n', 'v + n', 'adj + n_after', 'n + n', 'adv + adj', 'adj + v', 'phr_v + n_after', 'n + v', 'v + n_after', 'phr_v + n'}
+						#14.10.2023 {'abbreviation unknown + abbreviation unknown', 'abbreviation unknown + n', 'phr_v + n_after', 'phr_v + abbreviation unknown', 'abbreviation unknown + n_after', 'abbreviation unknown + v', 'phr_v + n', 'abbreviation unknown + adj'}
 						for k in dict_data[i].keys():
 							for o in dict_data[i][k]:
 								if o == 'collocations':
@@ -159,6 +160,19 @@ if __name__ == "__main__":
 										if k == 'phr_v' and l == 'n_after':
 											for n in sorted(list(dict_data[i][k][o][l])):
 												print(n, word)
+										if k == 'abbreviation unknown' and l == 'abbreviation unknown':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'abbreviation unknown' and l == 'n':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'phr_v' and l == 'abbreviation unknown':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'abbreviation unknown' and l == 'n_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										#{'phr_v + n', 'phr_v + n_after', 'adv + v', 'abbreviation unknown + n_after', 'adv + adj', 'abbreviation unknown + n'}
 					if i != word:
 						for k in dict_data[i].keys():
 							for o in dict_data[i][k]:
@@ -186,6 +200,14 @@ if __name__ == "__main__":
 											if k == 'v' and l == 'n_after':
 												print(word, i)
 											if k == 'phr_v' and l == 'n_after':
+												print(word, i)
+											if k == 'abbreviation unknown' and l == 'abbreviation unknown':
+												print(i, word)
+											if k == 'abbreviation unknown' and l == 'n':
+												print(i, word)
+											if k == 'phr_v' and l == 'abbreviation unknown':
+												print(i, word)
+											if k == 'abbreviation unknown' and l == 'n_after':
 												print(word, i)
 											#13.10.2023 {'n + n_after', 'adv + v', 'adj + n', 'v + n', 'adj + n_after', 'n + n', 'adv + adj', 'adj + v', 'phr_v + n_after', 'n + v', 'v + n_after', 'phr_v + n'}
 

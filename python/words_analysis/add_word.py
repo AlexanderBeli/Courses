@@ -125,7 +125,24 @@ class ShowVoc:
 
 	def show_words(self, ans):
 		self.ans = ans
-		print(sorted(list(dict_data.keys())))
+		letter = input("Write the LETTER of the ALPHABET or the CATEGORY the list you want to see: ")
+		temporary_list = []
+		if len(letter) == 1:
+			for i in dict_data:
+				if i[0] == letter:
+					temporary_list.append(i)
+		elif letter in category_list_data:
+			for i in dict_data:
+				for k in dict_data[i]:
+					if letter == k:
+						temporary_list.append(i)
+
+		else:
+			print(error_message)
+		temporary_list = sorted(temporary_list)
+		inputs = len(temporary_list)
+		print('\n'.join(temporary_list))
+		print(f'Total ammount is {inputs}')
 
 	def show_meaning(self, ans):
 		self.ans = ans
@@ -216,7 +233,7 @@ class AddVoc:
 				meaning = input(f"Please type the EXTRA MEANING of the {name} here: ")
 				#if check_in.check_w(meaning) == 1:
 				if isinstance(dict_data[name][category]['meaning'], str):
-					meaning = dict_data[name][category]['meaning'] + '\n' + meaning
+					meaning = dict_data[name][category]['meaning'] + ' ' + '\n' + meaning
 				dict_data[name][category]['meaning'] = meaning
 				with open(dict_source, 'wb') as upload_new_meaning:
 					pickle.dump(dict_data, upload_new_meaning)
@@ -546,7 +563,7 @@ class DeleteVoc:
 		else:
 			print(error_message)
 
-#усовершенствованная логика процесса Update 3.4
+#усовершенствованная логика процесса
 if __name__ == "__main__":
 
 	while True:
