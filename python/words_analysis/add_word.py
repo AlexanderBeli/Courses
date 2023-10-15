@@ -125,7 +125,7 @@ class ShowVoc:
 
 	def show_words(self, ans):
 		self.ans = ans
-		letter = input("Write the LETTER of the ALPHABET or the CATEGORY the list you want to see: ")
+		letter = input("Write the LETTER of the ALPHABET or the CATEGORY (e.g. noun, verb, adj, adv, phr_v, abbr_un) the list you want to see or the WORD: ")
 		temporary_list = []
 		if len(letter) == 1:
 			for i in dict_data:
@@ -136,13 +136,42 @@ class ShowVoc:
 				for k in dict_data[i]:
 					if letter == k:
 						temporary_list.append(i)
-
+		elif letter == 'noun':
+			letter = 'n'
+			for i in dict_data:
+				for k in dict_data[i]:
+					if letter == k:
+						temporary_list.append(i)
+		elif letter == 'verb':
+			letter = 'v'
+			for i in dict_data:
+				for k in dict_data[i]:
+					if letter == k:
+						temporary_list.append(i)
+		elif letter == 'abbr_un':
+			letter = 'abbreviation unknown'
+			for i in dict_data:
+				for k in dict_data[i]:
+					if letter == k:
+						temporary_list.append(i)
+		elif letter in dict_data:
+			print(letter)
+			print(dict_data[letter])
+			temporary_list.append(letter)
 		else:
 			print(error_message)
 		temporary_list = sorted(temporary_list)
 		inputs = len(temporary_list)
-		print('\n'.join(temporary_list))
-		print(f'Total ammount is {inputs}')
+		if len(temporary_list) > 1:
+			print('\n'.join(temporary_list))
+		print(f'Total ammount of {letter} is {inputs}')
+		print(f'Total ammount of the Dict is {len(dict_data)}')
+		percent = 100 * inputs / len(dict_data)
+		if percent > 1:
+			percent = int(percent)
+		else:
+			percent = round(percent, 4)
+		print(f'Percent of the words in the dictionary is {percent}%')
 
 	def show_meaning(self, ans):
 		self.ans = ans
