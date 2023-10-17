@@ -118,7 +118,7 @@ if __name__ == "__main__":
 
 			check_in = Check(word)
 			if check_in.check_w(word) == 1:
-				for i in dict_data.keys():
+				for i in sorted(list(dict_data)):
 					if i == word:
 						#print(f"{i} is {word} in dict")
 						#13.10.2023 {'n + n_after', 'adv + v', 'adj + n', 'v + n', 'adj + n_after', 'n + n', 'adv + adj', 'adj + v', 'phr_v + n_after', 'n + v', 'v + n_after', 'phr_v + n'}
@@ -173,43 +173,102 @@ if __name__ == "__main__":
 											for n in sorted(list(dict_data[i][k][o][l])):
 												print(n, word)
 										#{'phr_v + n', 'phr_v + n_after', 'adv + v', 'abbreviation unknown + n_after', 'adv + adj', 'abbreviation unknown + n'}
-					if i != word:
-						for k in dict_data[i].keys():
-							for o in dict_data[i][k]:
-								if o == 'collocations':
-									for l in dict_data[i][k][o].keys():
-										if word in tuple(dict_data[i][k][o][l]):
-											if k == 'adj' and l == 'n':
-												print(i, word)
-											if k == 'v' and l == 'n':
-												print(i, word)
-											if k == 'n' and l == 'v':
-												print(i, word)
-											if k == 'phr_v' and l == 'n':
-												print(i, word)
-											if k == 'adv' and l == 'v':
-												print(word, i)
-											if k == 'adv' and l == 'adj':
-												print(i, word)
-											if k == 'n' and l == 'n':
-												print(i, word)
-											if k == 'n' and l == 'n_after':
-												print(word, i)
-											if k == 'adj' and l == 'n_after':
-												print(word, i)
-											if k == 'v' and l == 'n_after':
-												print(word, i)
-											if k == 'phr_v' and l == 'n_after':
-												print(word, i)
-											if k == 'abbreviation unknown' and l == 'abbreviation unknown':
-												print(i, word)
-											if k == 'abbreviation unknown' and l == 'n':
-												print(i, word)
-											if k == 'phr_v' and l == 'abbreviation unknown':
-												print(i, word)
-											if k == 'abbreviation unknown' and l == 'n_after':
-												print(word, i)
-											#13.10.2023 {'n + n_after', 'adv + v', 'adj + n', 'v + n', 'adj + n_after', 'n + n', 'adv + adj', 'adj + v', 'phr_v + n_after', 'n + v', 'v + n_after', 'phr_v + n'}
-
+										if k == 'n' and l == 'adj':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'n' and l == 'v_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'n' and l == 'prep':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'n' and l == 'phrases':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word + ': ' + n)
+										if k == 'adj' and l == 'v_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'adj' and l == 'adv':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'adj' and l == 'prep':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'adj' and l == 'phrases':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word + ': ' + n)
+										if k == 'v' and l == 'adv':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'v' and l == 'v_after':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(n, word)
+										if k == 'v' and l == 'prep':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word, n)
+										if k == 'v' and l == 'phrases':
+											for n in sorted(list(dict_data[i][k][o][l])):
+												print(word + ': ' + n)
+					#if i != word:
+					for k in dict_data[i].keys():
+						for o in dict_data[i][k]:
+							if o == 'collocations':
+								for l in dict_data[i][k][o].keys():
+									if word in tuple(dict_data[i][k][o][l]):
+										if k == 'adj' and l == 'n':
+											print(i, word)
+										if k == 'v' and l == 'n':
+											print(i, word)
+										if k == 'n' and l == 'v':
+											print(i, word)
+										if k == 'phr_v' and l == 'n':
+											print(i, word)
+										if k == 'adv' and l == 'v':
+											print(word, i)
+										if k == 'adv' and l == 'adj':
+											print(i, word)
+										if k == 'n' and l == 'n':
+											print(i, word)
+										if k == 'n' and l == 'n_after':
+											print(word, i)
+										if k == 'adj' and l == 'n_after':
+											print(word, i)
+										if k == 'v' and l == 'n_after':
+											print(word, i)
+										if k == 'phr_v' and l == 'n_after':
+											print(word, i)
+										if k == 'abbreviation unknown' and l == 'abbreviation unknown':
+											print(i, word)
+										if k == 'abbreviation unknown' and l == 'n':
+											print(i, word)
+										if k == 'phr_v' and l == 'abbreviation unknown':
+											print(i, word)
+										if k == 'abbreviation unknown' and l == 'n_after':
+											print(word, i)
+										#13.10.2023 {'n + n_after', 'adv + v', 'adj + n', 'v + n', 'adj + n_after', 'n + n', 'adv + adj', 'adj + v', 'phr_v + n_after', 'n + v', 'v + n_after', 'phr_v + n'}
+										if k == 'n' and l == 'adj':
+											print(word, i)
+										if k == 'n' and l == 'v_after':
+											print(word, i)
+										if k == 'n' and l == 'prep':
+											print(i, word)
+										if k == 'n' and l == 'phrases':
+											print(word + ': ' + i)
+										if k == 'adj' and l == 'v_after':
+											print(word, i)
+										if k == 'adj' and l == 'adv':
+											print(word, i)
+										if k == 'adj' and l == 'prep':
+											print(i, word)
+										if k == 'adj' and l == 'phrases':
+											print(word + ': ' + i)
+										if k == 'v' and l == 'adv':
+											print(i, word)
+										if k == 'v' and l == 'v_after':
+											print(word, i)
+										if k == 'v' and l == 'prep':
+											print(i, word)
+										if k == 'v' and l == 'phrases':
+											print(word + ': ' + i)
 		else:
 			break

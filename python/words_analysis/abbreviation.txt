@@ -1,9 +1,12 @@
 n
 n_after
+v_after
 adj
 v
 adv
 pron
+prep
 phr_v
 idiom
+phrases
 abbreviation unknown
