@@ -37,3 +37,33 @@ ax.set_zlabel("Здоровье")
 ax.scatter(x, y, z)
 
 plt.show()
+
+'''
+Ниже работа с сайтами
+'''
+
+import time
+import json
+import requests
+from urllib.request import urlopen
+
+def get_html(link):
+	pass
+d = time.time()
+
+response = requests.get('https://sky.pro/media/')
+print(response.ok)  # проверяем успешен ли запрос?
+#json_response = response.json()
+print(response.text)  # выводим полученный ответ на экран
+
+print(time.time() - d)
+
+с = time.time()
+
+#with urlopen('http://sky.pro/media') as response:
+   #response_status = response.status  # сохраняем статус запроса в переменную
+   #html = response.read()  # вычитываем ответ в переменную
+#print(response_status == 200)  # проверяем успешен ли запрос
+#print(html.decode())  # выводим полученный ответ на экран
+
+print(time.time() - с)
