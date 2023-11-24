@@ -20,7 +20,7 @@ def proxy_list():
         #proxy = {'http': 'socks4://194.28.91.10:5678'}
         #proxy = {'https': 'https://31.47.37.116:8080'} #изначальный
         #proxy = {'http': 'http://31.47.37.116:8080'}
-        proxy = {'http': 'http://8.209.114.72:3129'} #"origin": "47.254.169.94" #https://advanced.name/ru/freeproxy?type=elite
+        proxy = {'http': 'http://170.106.117.75:3030', 'https': 'https://170.106.117.75:3030'} #"origin": "47.254.169.94" #https://advanced.name/ru/freeproxy?type=elite
         #proxy = {'http': 'http://95.217.195.45:8080'}
 
     print(proxy)
@@ -56,14 +56,14 @@ def get_ip(html=None):
 
 def main():
     #path = 'https://sitespy.ru/my-ip'
-    path = 'http://httpbin.org/ip' #сработало proxy = {'http': 'socks4://194.28.91.10:5678'}
+    #path = 'http://httpbin.org/ip' #сработало proxy = {'http': 'socks4://194.28.91.10:5678'}
     #path = 'https://whatismyipaddress.com'
-    #path = 'https://ip.nic.ru'
+    path = 'https://ip.nic.ru'
     #html = get_html(path)
     #get_ip(html)
     header = header_list()
     proxy = proxy_list()
-    response = requests.get(path, headers=header, proxies=proxy)
+    response = requests.get(path, headers=header, proxies=proxy, verify=False)
     print(response)
     print(response.text)
     #soup = BeautifulSoup(response.text, 'html5lib')
