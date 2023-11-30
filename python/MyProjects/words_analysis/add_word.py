@@ -51,6 +51,7 @@ choice_answer_word_category = ("word's categories", "wc", "worcat", "words cat",
 #при запросе ввода информации указать: Если вы хотите выйти из режима/завершить напишите 'exit'
 
 class Check:
+	#__slots__ = ['item'] #Only 'item' attribute is allowed
 	def __init__(self, stroke):
 		self.stroke = stroke
 
@@ -116,6 +117,7 @@ class Check:
 
 
 class ShowVoc:
+	#__slots__ = ['item']  # Only 'item' attribute is allowed
 	def __init__(self, stroke):
 		self.stroke = stroke
 
@@ -218,6 +220,7 @@ class ShowVoc:
 
 
 class AddVoc:
+	#__slots__ = ['item']  # Only 'item' attribute is allowed
 	def __init__(self, stroke):
 		self.stroke = stroke
 
@@ -363,6 +366,7 @@ class AddVoc:
 
 
 class ChangeVoc:
+	#__slots__ = ['item']  # Only 'item' attribute is allowed
 	def __init__(self, stroke):
 		self.stroke = stroke
 
@@ -488,6 +492,7 @@ class ChangeVoc:
 					print(ch_suc_message)
 
 class DeleteVoc:
+	#__slots__ = ['item']  # Only 'item' attribute is allowed
 	def __init__(self, stroke):
 		self.stroke = stroke
 
