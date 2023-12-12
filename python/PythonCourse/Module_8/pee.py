@@ -82,6 +82,8 @@ def db_query():
     for k in query3:
         print(k.name)
 
-if not os.path.exists('db2.sqlite'):
-    db_create()
-db_query()
+if __name__ == "__main__":
+    if not os.path.exists('db2.sqlite'):
+        db_create()
+    db_query()
+    db.close()
