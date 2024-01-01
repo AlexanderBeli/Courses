@@ -8,4 +8,11 @@
 
 ptest -> shop
 
-dronov-> samplesite
+dronov-> samplesite, bboard
+
+django_project - находится.venv
+
+helloworld - находится.venv и проект
+
+samplesite - сайт объявлений
+bboard - сайт объявлений(2.0) 
