@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class Person:
     def __init__(self, first=None, last=None, age=None):
         self.first = first
@@ -11,7 +12,8 @@ class Person:
         self.last = result[1]
         self.age = result[2]
 
-conn = sqlite3.connect('mydata.db')
+
+conn = sqlite3.connect("mydata.db")
 c = conn.cursor()
 
 # c.execute( """CREATE TABLE persons (
@@ -24,8 +26,10 @@ c = conn.cursor()
 #                 ('Anna', 'Smith', 30),
 #                 ('Mike', 'Johnson', 40)""")
 
-c.execute("""SELECT * FROM persons 
-            WHERE last_name = 'Smith'""" )
+c.execute(
+    """SELECT * FROM persons 
+            WHERE last_name = 'Smith'"""
+)
 for x in c.fetchall():
     person1 = Person()
     person1.clone_person(x)
@@ -41,8 +45,8 @@ for x in c.fetchall():
 # c.execute("INSERT INTO persons VALUES (?, ?, ?)",
 #           (person2.first, person2.last, person2.age))
 
-c.execute( "SELECT * FROM persons" )
-print (c.fetchall())
+c.execute("SELECT * FROM persons")
+print(c.fetchall())
 
 conn.commit()
 conn.close()
