@@ -8,7 +8,6 @@
 
 ptest -> shop
 
-<<<<<<< HEAD
 dronov-> samplesite, bboard
 
 django_project - находится.venv
@@ -17,6 +16,3 @@ helloworld - находится.venv и проект
 
 samplesite - сайт объявлений
 bboard - сайт объявлений(2.0) 
-=======
-dronov-> samplesite
->>>>>>> cf7d29f87446e195b2489fedaf3b6d4ef3dce8a6
