@@ -2,6 +2,12 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PythonCourse/Module_9-10" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PythonCourse/Module_9-10/blog" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/PythonCourse/Module_9-10/helloworld" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PythonCourse/Module_9-10/message-board" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PythonCourse/Module_9-10/news" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PythonCourse/Module_9-10/newsblog" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PythonCourse/Module_9-10/pages" vcs="Git" />
   </component>
 </project>

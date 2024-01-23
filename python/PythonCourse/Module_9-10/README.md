@@ -1,4 +1,5 @@
-Цель: научиться работать с Django
+
+<h3>Цель: научиться работать с Django</h3>
 Доп цель:  
 Дата начала работ: 10.12.2023
 Дата завершения работ: 
@@ -6,13 +7,14 @@
 
 В данном модуле находятся виртуальные среды и сайты, связанные с ними.
 
-ptest -> shop
+ptest -> shop (школа Бруноям)
 
-dronov-> samplesite, bboard
-
-django_project - находится.venv
-
-helloworld - находится.venv и проект
+dronov-> samplesite, bboard (Дронов)
 
 samplesite - сайт объявлений
 bboard - сайт объявлений(2.0) 
+
+
+helloworld - находится.venv и проект (Django for beginners)
+pages - находится.venv и проект
+messages-board - находится.venv и проект
