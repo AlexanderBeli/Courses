@@ -11,13 +11,21 @@ Work Log (Достижения, прогресс)
 - Базовое владение Django 5.0, Crispy (январь 2024г.)
 - Выставил проект на Heroku (январь 2024г.)
 - Ближе к среднему уровню/ более уверенное владение Django, разворачивание на Heroku, подключение PostgresSQL, перенос БД (январь 2024г.) + SendGrid
-
-
-
-
-
-
+- Docker локально
+- django-allauth + аутентификация через Google, Facebook, Telegram, GitHub (февраль 2024)
+- Django REST Framework (февраль 2024)
+- Развертывание на Fly.io (февраль 2024)
+- В процессе выполнения проекта научился использовать библиотеку django-phonenumber-field, редактировать код библиотеки, совместимой с более старой версией django, импортировать Гугл-карты через iframe ... (март 2024)
+- Настроил локализацию и интернационализацию на 3 языках, перевод статических страниц - Django, Docker (март 2024)
+- Оптимизация изображений: ImageOptim, WebP и др. (Апрель 2024)
+- Проекты на курсах (in process)
+- React Front-End (in process)
 
 
 
 SendGrid
+? Two-factor auth + Twilio
+https://django-two-factor-auth.readthedocs.io/en/stable/configuration.html
+https://www.twilio.com/en-us
+? Fly.io
+? размещение media files
