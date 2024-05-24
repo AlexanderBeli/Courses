@@ -19,7 +19,7 @@ Work Log (Достижения, прогресс)
 - Настроил локализацию и интернационализацию на 3 языках, перевод статических страниц - Django, Docker (март 2024)
 - Оптимизация изображений: ImageOptim, WebP и др. (Апрель 2024)
 - Реализовал перевод динамических страниц (категорий) в виде табличных данных и специально для этого написанного контроллера (май 2024)
-- Amazon S3 Storage, настройки, конфигурации (май 2024)
+- Amazon S3 Storage, настройки, конфигурации. Научился размещать media files на сервере, управлять через формы. (май 2024)
 - Проекты на курсах (in process)
 - React Front-End (in process)
 
@@ -30,4 +30,3 @@ SendGrid
 https://django-two-factor-auth.readthedocs.io/en/stable/configuration.html
 https://www.twilio.com/en-us
 ? Fly.io
-? размещение media files
