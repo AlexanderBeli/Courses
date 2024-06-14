@@ -21,6 +21,7 @@ Work Log (Достижения, прогресс)
 - Реализовал перевод динамических страниц (категорий) в виде табличных данных и специально для этого написанного контроллера (май 2024)
 - Amazon S3 Storage, настройки, конфигурации. Научился размещать media files на сервере, управлять через формы. (май 2024)
 - PyEnv, научился ставить различные версии Python, включая версии 2х, работать с скриптами на python2 (май 2024)
+- Django raw SQL query, TrigramExtension - написал логику поиска на мультиязычном сайте, возможноть осуществлять поиск как отдельным словом так и на основании корней/лексем нескольких слов (июнь 2024)
 - Проекты на курсах (in process)
 - React Front-End (in process)
 
@@ -30,4 +31,3 @@ SendGrid
 ? Two-factor auth + Twilio
 https://django-two-factor-auth.readthedocs.io/en/stable/configuration.html
 https://www.twilio.com/en-us
-? Fly.io
