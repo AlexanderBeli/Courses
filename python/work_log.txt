@@ -31,6 +31,7 @@ Work Log (Достижения, прогресс)
 - Подключение к API mail@mail.ru используя библиотеки email, imaplib (ноябрь 2024)
 - PHP, Laravel, VueJS, Nginx (ноябрь 2024)
 - httpie, отправка запросов на локальный API адрес, настройка GET POST запросы через API (ноябрь 2024)
+- тестирование при помощи unittest, mock builtins (декбрь 2024)
 - React Front-End (in process)
 
 
