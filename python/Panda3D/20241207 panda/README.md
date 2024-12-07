@@ -1,11 +1,9 @@
-<p align="center"><a href="https://docs.panda3d.org/1.10/python/index" target="_blank"><img src="https://discourse.panda3d.org/uploads/default/original/2X/7/7e159e890a45d958f2ad11dce4e37cc2a70d288f.png" width="400" alt="Panda3D Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://docs.panda3d.org/1.10/python/index" target="_blank">
+    <img src="https://discourse.panda3d.org/uploads/default/original/2X/7/7e159e890a45d958f2ad11dce4e37cc2a70d288f.png" width="400" alt="Panda3D Logo">
+  </a>
 </p>
+
 
 ## About Laravel
 
