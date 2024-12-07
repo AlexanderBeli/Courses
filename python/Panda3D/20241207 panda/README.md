@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://docs.panda3d.org/1.10/python/index" target="_blank">
-    <img src="https://discourse.panda3d.org/uploads/default/original/2X/7/7e159e890a45d958f2ad11dce4e37cc2a70d288f.png" width="400" alt="Panda3D Logo">
+    <img src="https://discourse.panda3d.org/uploads/default/original/2X/1/1160aa0bd9cb22500a2eb9f35ef667aa80960cb5.png" width="400" alt="Panda3D Logo">
   </a>
 </p>
 
