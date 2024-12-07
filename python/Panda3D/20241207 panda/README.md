@@ -5,4 +5,27 @@
 </p>
 
 
-## About 
+# How to use
+
+## First steps
+
+First, download the files
+
+Second, create the virtual environment
+
+Third, istall requirements
+
+```shell
+$ pip install -r requirements.txt
+```
+
+Open the project:
+
+```shell
+$ python3 panda_main.py
+```
+
+## License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
