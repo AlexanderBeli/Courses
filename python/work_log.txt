@@ -33,6 +33,7 @@ Work Log (Достижения, прогресс)
 - httpie, отправка запросов на локальный API адрес, настройка GET POST запросы через API (ноябрь 2024)
 - тестирование при помощи unittest, mock builtins (декбрь 2024)
 - Panda3D basics (декабрь 2024)
+- Vuex (декабрь 2024)
 - React Front-End (in process)
 
 
