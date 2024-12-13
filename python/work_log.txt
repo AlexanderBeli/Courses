@@ -37,6 +37,8 @@ Work Log (Достижения, прогресс)
 - тестирование при помощи unittest, mock builtins (декбрь 2024)
 - Panda3D basics (декабрь 2024)
 - Vuex (декабрь 2024)
+- pattern matching (декабрь 2024), проект Biblioteque
+- Принцип DDD (декабрь 2024), проект Biblioteque
 - React Front-End (in process)
 
 
