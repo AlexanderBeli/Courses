@@ -39,6 +39,7 @@ Work Log (Достижения, прогресс)
 - Vuex (декабрь 2024)
 - pattern matching (декабрь 2024), проект Biblioteque
 - Принцип DDD (декабрь 2024), проект Biblioteque
+- HTML-верстка по Фигме (декабрь 2024)
 - React Front-End (in process)
 
 
