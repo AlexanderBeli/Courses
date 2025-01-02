@@ -40,6 +40,9 @@ Work Log (Достижения, прогресс)
 - pattern matching (декабрь 2024), проект Biblioteque
 - Принцип DDD (декабрь 2024), проект Biblioteque
 - HTML-верстка по Фигме (декабрь 2024)
+
+2025
+- прочитал Адитья Бхаргава "Грокаем алгоритмы"
 - React Front-End (in process)
 
 
